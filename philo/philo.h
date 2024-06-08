@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:46:37 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/06/05 00:06:43 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:22:58 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <pthread.h>
-#include <sys/time.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -33,8 +34,9 @@ typedef struct s_info
     t_philo philo;
 } t_info;
 
-void    invalid_input(int ac, char *av[]);
+void    invalid_input(int ac, char *av[], t_info *datap);
 void    check_args(int ac, char *av[], t_info *data);
-int     ft_atoi(const char	*str, int *arr);
+int     ft_atoi(const char	*str, t_info *data);
+void    ft_exit(t_info *data);
 
 #endif

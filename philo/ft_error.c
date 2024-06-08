@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 20:46:16 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/06/07 18:21:06 by hboustaj         ###   ########.fr       */
+/*   Created: 2024/06/07 15:29:11 by hboustaj          #+#    #+#             */
+/*   Updated: 2024/06/07 18:22:31 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int ac, char *av[])
+void    ft_exit(t_info *data)
 {
-    t_info *data;
-
-    data = malloc(sizeof(t_info));
-    check_args(ac, av, data);
-    // printf("pilo_ num : %d \n", data->philo_nb);
-    // printf("time die : %d \n", data->time_die);
-    // printf("time eat : %d \n", data->time_eat);
-    // printf("tima slp : %d \n", data->time_slp);
-    // printf("num of meal : %d \n", data->num_of_meal);
-   
+    free(data);
+    exit(1);
 }

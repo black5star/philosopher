@@ -6,13 +6,13 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:46:34 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/06/05 00:06:43 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:33:02 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char	*str, int *arr)
+int	ft_atoi(const char	*str, t_info *data)
 {
 	int long	result;
 	int			i;
@@ -27,10 +27,10 @@ int	ft_atoi(const char	*str, int *arr)
 	{
 		result = result * 10 + (str[i] - 48);
 		if ((result > 2147483647))
-			exit(1);
+			ft_exit(data);
 		i++;
 	}
 	if (str[i] == '+')
-		exit(1);
+		ft_exit(data);
 	return (result);
 }
