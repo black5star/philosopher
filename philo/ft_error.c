@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 15:29:11 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/06/07 18:22:31 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:41:47 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    ft_exit(t_info *data)
+void    ft_exit(char *s)
 {
-    free(data);
-    exit(1);
+    printf("%s\n");
+    exit(EXIT_FAILURE);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:46:34 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/06/07 15:33:02 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:49:58 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char	*str, t_info *data)
+int	ft_atoi(const char	*str)
 {
 	int long	result;
 	int			i;
@@ -27,10 +27,10 @@ int	ft_atoi(const char	*str, t_info *data)
 	{
 		result = result * 10 + (str[i] - 48);
 		if ((result > 2147483647))
-			ft_exit(data);
+			ft_exit("you passed int_max limit");
 		i++;
 	}
 	if (str[i] == '+')
-		ft_exit(data);
+		ft_exit("error in atoi");
 	return (result);
 }

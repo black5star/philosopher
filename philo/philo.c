@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:46:16 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/06/07 18:21:06 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/14 19:41:56 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int ac, char *av[])
-{
-    t_info *data;
 
-    data = malloc(sizeof(t_info));
-    check_args(ac, av, data);
+int main(int ac, char **av)
+{
+    t_info data;
+
+    check_args(ac, av, &data);
+    ft_init(&data);
     // printf("pilo_ num : %d \n", data->philo_nb);
     // printf("time die : %d \n", data->time_die);
     // printf("time eat : %d \n", data->time_eat);
