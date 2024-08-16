@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   timing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 15:29:11 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/15 12:06:07 by hboustaj         ###   ########.fr       */
+/*   Created: 2024/08/15 11:45:08 by hboustaj          #+#    #+#             */
+/*   Updated: 2024/08/15 12:26:54 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    ft_exit(char *s)
+long    time_now()
 {
-    printf("%s\n", s);
-    exit(EXIT_FAILURE);
+    struct timeval t;
+    
+    gettimeofday(&t, NULL);
+    return(t.tv_usec);
 }

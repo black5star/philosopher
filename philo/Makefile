@@ -1,14 +1,14 @@
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra - Werror
+CFLAGS = -Wall
 FLAG = -pthread
-SRCS = philo.c parsing.c ft_init.c libft.c ft_error.cc
+SRCS = philo.c parsing.c ft_init.c libft.c timing.c ft_error.c
 OBJC = $(SRCS:.c=.o)
 
-all:$(NAME)
+all: $(NAME)
 
-$(NAME) = $(OBJC)
-	@$(CC) $(SRCS) $(CFLAGS) $(FLAG) -o philo
+$(NAME) : $(OBJC)
+	@$(CC) $(CFLAGS) $(SRCS) $(FLAG) -o philo
 	@echo "executable file is ready"
 
 .c.o:
