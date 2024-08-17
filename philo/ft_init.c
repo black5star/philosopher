@@ -3,18 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 19:24:01 by blackstar         #+#    #+#             */
-/*   Updated: 2024/08/16 12:09:23 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/17 14:39:24 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    assign_forks(t_forks *fork, t_philo *philo, int i)
+void    init_forks(t_forks *fork, t_philo *philo, int i)
 {
-    
+    int philo_nb;
+
+    philo_nb = philo->data->philo_nb;
+    if(philo->id % 2)
+        usleep(5);
+    philo->right_fork = &fork[i];
+    philo->left_fork = &fork[(i + 1) % philo_nb];
 }
 
 void    ini_philos(t_info *data)
@@ -29,7 +35,7 @@ void    ini_philos(t_info *data)
         philo->id = i + 1;
         philo->data = data;
         philo->meals_count = 0;
-        assign_forks(data->forks, philo, i);
+        init_forks(data->forks, philo, i);
     }
 }
 
@@ -42,10 +48,9 @@ void ft_init(t_info *data)
     i = -1;
     while(++i < data->philo_nb)
     {
-        pthread_mutex_init(&data->forks->fork, NULL);
+        pthread_mutex_init(&data->forks[i].fork, NULL);
         data->forks[i].fork_id = i;
     }
     pthread_mutex_init(&data->message, NULL);
     init_philos(data);
-    // data->start_time = time_now();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:46:37 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/16 12:01:08 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:24:18 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void    invalid_input(int ac, char *av[]);
 void    check_args(int ac, char *av[], t_info *data);
 int     ft_atoi(const char	*str);
 void    ft_init(t_info *data);
+void    init_forks(t_forks *fork, t_philo *philo, int i);
 void    ft_exit(char *s);
 long    time_now();
 
