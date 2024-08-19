@@ -2,7 +2,7 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall
 FLAG = -pthread
-SRCS = philo.c parsing.c ft_init.c libft.c timing.c ft_error.c
+SRCS = philo.c parsing.c ft_init.c message.c ft_error.c feeding.c utils.c
 OBJC = $(SRCS:.c=.o)
 
 all: $(NAME)
