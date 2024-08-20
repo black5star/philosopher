@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 20:46:31 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/18 23:11:33 by blackstar        ###   ########.fr       */
+/*   Created: 2024/08/20 19:03:30 by hboustaj          #+#    #+#             */
+/*   Updated: 2024/08/20 19:03:32 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void    invalid_input(int ac, char **av)
     }
 }
 
-void    check_args(int ac, char **av, t_info *data)
+void    check_args(int ac, char **av, t_main *data)
 {
     if(ac != 5 && ac != 6)
         ft_exit("args are more or less than required");
@@ -72,7 +72,7 @@ void    check_args(int ac, char **av, t_info *data)
     }
     else
         data->max_meals = -1;
-    if(data->philo_nb <=0 || data->philo_nb > 200
+    if(data->philo_nb <= 0 || data->philo_nb > 200
         || data->time_die < 60 || data->time_eat < 60
         || data->time_slp < 60)
         ft_exit("invalid numbers");

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/07 15:29:11 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/18 13:45:26 by blackstar        ###   ########.fr       */
+/*   Created: 2024/08/20 19:02:59 by hboustaj          #+#    #+#             */
+/*   Updated: 2024/08/20 19:03:00 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "philo.h"
 

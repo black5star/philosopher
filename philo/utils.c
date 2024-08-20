@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 11:45:08 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/19 14:37:28 by blackstar        ###   ########.fr       */
+/*   Created: 2024/08/20 19:03:58 by hboustaj          #+#    #+#             */
+/*   Updated: 2024/08/20 19:46:20 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void set_value(pthread_mutex_t *mutex, int *var, int val)
     pthread_mutex_unlock(mutex);
 }
 
-void value_modifier(pthread_mutex_t *mutex, int *var)
+void incrementer(pthread_mutex_t *mutex, int *var)
 {
     pthread_mutex_lock(mutex);
     *var += 1;
@@ -35,19 +35,7 @@ int get_value(pthread_mutex_t *mutex, int *var)
     return(returned);
 }
 
-bool threadsflag_control(pthread_mutex_t *mutex, int philo_nb, int *threads)
-{
-    bool returned;
-
-    returned = 0;
-    pthread_mutex_lock(mutex);
-    if(*threads == philo_nb)
-        returned = 1;
-    pthread_mutex_unlock(mutex);
-    return(returned);
-}
-
-void    ft_usleep(long u_time, t_info *data)
+void    ft_usleep(long u_time, t_main *data)
 {
     long start;
     long rest;
@@ -55,16 +43,11 @@ void    ft_usleep(long u_time, t_info *data)
     start = time_now() * 1e3;
     while((time_now() * 1e3) - start < u_time)
     {
-        if(get_value(&data->mutex, &data->end_time))
-            break ;
         rest = u_time - ((time_now() * 1e3) - start);
-        if(rest > 1e3)
-            usleep(u_time / 2);
+        if(rest > 5)
+            usleep(rest / 2);
         else
-        {
-            while((time_now() * 1e3) - start < u_time)
-                ;
-        }
+            usleep(rest);
     }
 }
 
