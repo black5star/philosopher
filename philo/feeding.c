@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:02:52 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/20 20:13:47 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:10:28 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void    eating(t_philo *philo)
     incrementer(&philo->p_mutex, &philo->meals_count);
     write_message(philo, EATING);
     ft_usleep((philo->data->time_eat * 1e3), philo->data);
-    pthread_mutex_unlock(&philo->right_fork->fork);
     pthread_mutex_unlock(&philo->left_fork->fork);
+    pthread_mutex_unlock(&philo->right_fork->fork);
 }
 
 void    *get_dinner(void *p)
@@ -30,7 +30,8 @@ void    *get_dinner(void *p)
     t_philo *philo;
     
     philo = (t_philo *)p;
-    while(!get_value(&philo->data->mutex, &philo->data->end_time))
+
+    while(!get_value(&philo->data->mutex, &philo->data->death_flag))
     {
         if(philo->meals_count == philo->data->max_meals)
             break ;

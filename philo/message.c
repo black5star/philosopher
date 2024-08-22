@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:18 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/20 19:03:20 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:06:21 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void    write_message(t_philo *philo, t_status stat)
     long    time;
     int     end_time;
     
-    if(philo->meals_count == philo->data->max_meals)
-        return ;
-    end_time = philo->data->end_time;
+    end_time = philo->data->death_flag;
     time = time_now() - philo->data->start_time;
     pthread_mutex_lock(&philo->data->message);
     if(stat == FORK && !get_value(&philo->data->mutex, &end_time))

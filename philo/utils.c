@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:58 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/20 19:46:20 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:08:27 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void    ft_usleep(long u_time, t_main *data)
     long rest;
 
     start = time_now() * 1e3;
-    while((time_now() * 1e3) - start < u_time)
+    while((time_now() * 1e3) - start < u_time &&
+        !(get_value(&data->mutex, &data->death_flag)))
     {
         rest = u_time - ((time_now() * 1e3) - start);
         if(rest > 5)

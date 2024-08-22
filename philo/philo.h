@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:46 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/20 20:02:42 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:08:47 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ struct s_main
     int time_slp;
     int max_meals;
     long start_time;
-    int end_time;
+    int death_flag;
     t_philo *philo;
     t_forks *forks;
+    pthread_t observer;
     pthread_mutex_t mutex;
     pthread_mutex_t message;
 };
