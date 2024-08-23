@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:02:59 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/20 19:03:00 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/22 16:15:39 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void    ft_exit(char *s)
 {
-    printf("%s\n", s);
+    if(s)
+        printf("%s\n", s);
     exit(EXIT_FAILURE);
 }
