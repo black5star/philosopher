@@ -6,24 +6,27 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:37 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/22 16:28:40 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:13:47 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long time_out(t_philo *philo)
+int time_out(t_philo *philo)
 {
     long last_meal_time;
-    long time;
+    long temp;
+    int time;
     
     pthread_mutex_lock(&philo->p_mutex);
     last_meal_time = philo->last_meal_time;
+    temp = time_now() - philo->data->start_time;
+    time = temp - last_meal_time;
     pthread_mutex_unlock(&philo->p_mutex);
-    time = time_now() - philo->data->start_time;
-    return (time - last_meal_time);
+    return (time);
 }
-void    turn_the_flag(t_philo *philo, long time)
+
+void    turn_the_flag(t_philo *philo, int time)
 {
     pthread_mutex_lock(&philo->p_mutex);
     if(time > philo->data->time_die)
@@ -34,10 +37,23 @@ void    turn_the_flag(t_philo *philo, long time)
 void    *monitor(void *p)
 {
     t_main *data;
+    t_philo *philo;
+    int i;
 
     data = (t_main *)p;
-    while(!get_value(&data->mutex, &data->death_flag))
-        ;
+    i = -1;
+    while(++i <= data->philo_nb)
+    {
+        philo = &data->philo[i];
+        turn_the_flag(philo, time_out(philo));
+        if(get_value(&philo->data->mutex, &philo->data->death_flag))
+        {
+            write_message(philo, DIED);
+            ft_exit(NULL);
+        }
+        if(i == data->philo_nb - 1)
+            i = -1;
+    }
     return (NULL);
 }
 

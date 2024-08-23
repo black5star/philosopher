@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:46 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/22 16:09:40 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:53:36 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void    write_message(t_philo *philo, t_status stat);
 int     get_value(pthread_mutex_t *mutex, int *var);
 void    incrementer(pthread_mutex_t *mutex, int *var);
 void    ft_exit(char *s);
-void    turn_the_flag(t_philo *philo, long time);
-long    time_out(t_philo *philo);
+void    turn_the_flag(t_philo *philo, int time);
+int    time_out(t_philo *philo);
 void    *monitor(void *p);
 
 #endif
