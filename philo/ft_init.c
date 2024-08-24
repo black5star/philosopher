@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:07 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/22 11:04:56 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:32:13 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    init_forks(t_forks *fork, t_philo *philo, int i)
     int philo_nb;
 
     philo_nb = philo->data->philo_nb;
-    if(philo->id % 2)
+    if(!(philo->id % 2))
     {
         philo->right_fork = &fork[(i + 1) % philo_nb];
         philo->left_fork = &fork[i];
@@ -41,6 +41,7 @@ void    init_philos(t_main *data)
         philo->id = i + 1;
         philo->data = data;
         philo->meals_count = 0;
+        pthread_mutex_init(&data->philo->p_mutex, NULL);
         init_forks(data->forks, philo, i);
     }
 }

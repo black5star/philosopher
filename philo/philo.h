@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:46 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/23 15:53:36 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:42:44 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ void    *get_dinner(void *p);
 void    eating(t_philo *philo);
 
 long    time_now();
-void    ft_usleep(long u_time, t_main *data);
+void    ft_usleep(long u_time, t_philo *philo);
 void    write_message(t_philo *philo, t_status stat);
 int     get_value(pthread_mutex_t *mutex, int *var);
 void    incrementer(pthread_mutex_t *mutex, int *var);
 void    ft_exit(char *s);
-void    turn_the_flag(t_philo *philo, int time);
-int    time_out(t_philo *philo);
-void    *monitor(void *p);
+void    turn_and_check(t_philo *philo, int time);
+int     time_out(t_philo *philo);
+// void    *monitor(void *p);
 
 #endif

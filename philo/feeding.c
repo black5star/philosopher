@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:02:52 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/23 16:16:21 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/23 18:07:40 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void    eating(t_philo *philo)
     write_message(philo, FORK);
     incrementer(&philo->p_mutex, &philo->meals_count);
     write_message(philo, EATING);
-    ft_usleep((philo->data->time_eat * 1e3), philo->data);
-    pthread_mutex_unlock(&philo->left_fork->fork);
+    ft_usleep(philo->data->time_eat, philo);
     pthread_mutex_unlock(&philo->right_fork->fork);
+    pthread_mutex_unlock(&philo->left_fork->fork);
 }
 
 void    *get_dinner(void *p)
@@ -35,10 +35,9 @@ void    *get_dinner(void *p)
     {
         if(philo->meals_count == philo->data->max_meals)
             break ;
-        philo->last_meal_time = time_now() - philo->data->start_time;
         eating(philo);
         write_message(philo, SLEEPING);
-        ft_usleep((philo->data->time_slp * 1e3), philo->data);
+        ft_usleep(philo->data->time_slp, philo);
         write_message(philo, THINKING);
     }
     return (NULL);
@@ -55,6 +54,4 @@ void    start_feeding(t_main *data)
     i = -1;
     while(++i < data->philo_nb)
         pthread_join(data->philo[i].thread, NULL);
-    pthread_create(&data->observer, NULL, monitor, &data);
-    pthread_join(data->observer, NULL);
 }

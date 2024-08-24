@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:58 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/22 11:08:27 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:43:04 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ int get_value(pthread_mutex_t *mutex, int *var)
     return(returned);
 }
 
-void    ft_usleep(long u_time, t_main *data)
+void    ft_usleep(long u_time, t_philo *philo)
 {
     long start;
     long rest;
 
     start = time_now() * 1e3;
-    while((time_now() * 1e3) - start < u_time &&
-        !(get_value(&data->mutex, &data->death_flag)))
+    u_time *= 1e3;
+    while((time_now() * 1e3) - start < u_time)
     {
+        turn_and_check(philo, time_out(philo));
         rest = u_time - ((time_now() * 1e3) - start);
         if(rest > 5)
             usleep(rest / 2);
