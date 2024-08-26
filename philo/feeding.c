@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   feeding.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:02:52 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/26 12:24:54 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/26 19:21:22 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void    write_message(t_philo *philo, t_status stat)
     
     pthread_mutex_lock(&philo->data->message);
     time = time_now() - philo->data->start_time;
-    if(stat == FORK)
+    if(stat == FORK && !get_value(&philo->data->mutex, &philo->data->death_flag))
         printf("%ld %d has taken a fork\n", time, philo->id);
-    else if(stat == EATING)
+    else if(stat == EATING && !get_value(&philo->data->mutex, &philo->data->death_flag))
     {
         philo->last_meal_time = time;
         printf("%ld %d is eating\n", time, philo->id);
     }
-    else if(stat == SLEEPING)
+    else if(stat == SLEEPING && !get_value(&philo->data->mutex, &philo->data->death_flag))
         printf("%ld %d is sleeping\n", time, philo->id);
-    else if(stat == THINKING)
+    else if(stat == THINKING && !get_value(&philo->data->mutex, &philo->data->death_flag))
         printf("%ld %d is thinking\n", time, philo->id);
     else if(stat == DIED)
         printf("%ld %d died\n", time, philo->id);
@@ -52,12 +52,14 @@ void    *get_dinner(void *p)
     t_philo *philo;
     
     philo = (t_philo *)p;
-
-    while(!get_value(&philo->data->mutex, &philo->data->death_flag))
+    
+    incrementer(&philo->p_mutex, &philo->data->threads_counter);
+    while(!get_value(&philo->data->mutex, &philo->data->death_flag)
+        && !get_value(&philo->data->mutex, &philo->data->all_are_full))
     {
+        eating(philo);
         if(philo->meals_count == philo->data->max_meals)
             incrementer(&philo->p_mutex, &philo->data->full);
-        eating(philo);
         write_message(philo, SLEEPING);
         ft_usleep(philo->data->time_slp);
         write_message(philo, THINKING);

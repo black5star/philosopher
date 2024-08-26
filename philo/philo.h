@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:46 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/26 12:04:23 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:14:31 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ struct s_main
     long start_time;
     int full;
     int death_flag;
+    int all_are_full;
+    int threads_counter;
+    pthread_t observer;
     t_philo *philo;
     t_forks *forks;
-    pthread_t observer;
     pthread_mutex_t monitor_mtx;
     pthread_mutex_t monitor_time;
     pthread_mutex_t mutex;
@@ -95,9 +97,10 @@ long    time_now();
 int     time_out(t_philo *philo);
 
 void    ft_exit(char *s);
-void    ft_free(t_main *data, int flag);
-void    turn_and_check(t_philo *philo, int time);
+void    ft_free(t_main *data);
+bool    turn_and_check(t_philo *philo, int time);
 void    *monitor(void *p);
+void    set_value(pthread_mutex_t *mutex, int *var, int val);
 
 
 #endif

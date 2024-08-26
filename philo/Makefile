@@ -1,6 +1,6 @@
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 FLAG = -pthread
 SRCS = philo.c parsing.c ft_init.c ft_error.c feeding.c utils.c
 OBJC = $(SRCS:.c=.o)
