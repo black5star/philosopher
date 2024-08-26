@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   feeding.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:02:52 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/23 18:07:40 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:31:44 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ void    *get_dinner(void *p)
     while(!get_value(&philo->data->mutex, &philo->data->death_flag))
     {
         if(philo->meals_count == philo->data->max_meals)
+        {
+            incrementer(&philo->p_mutex, &philo->data->full);
+            printf("***philo %d is full and the value is %d********\n", philo->id, philo->data->full);
             break ;
+        }
         eating(philo);
         write_message(philo, SLEEPING);
         ft_usleep(philo->data->time_slp, philo);
@@ -52,6 +56,8 @@ void    start_feeding(t_main *data)
     while(++i < data->philo_nb)
         pthread_create(&data->philo[i].thread, NULL, get_dinner, &data->philo[i]);
     i = -1;
+    pthread_create(&data->observer, NULL, monitor, data);
     while(++i < data->philo_nb)
         pthread_join(data->philo[i].thread, NULL);
+    pthread_join(data->observer, NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:46 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/23 17:42:44 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:16:01 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ struct s_main
     int time_slp;
     int max_meals;
     long start_time;
+    int full;
     int death_flag;
     t_philo *philo;
     t_forks *forks;
@@ -87,6 +88,7 @@ void    incrementer(pthread_mutex_t *mutex, int *var);
 void    ft_exit(char *s);
 void    turn_and_check(t_philo *philo, int time);
 int     time_out(t_philo *philo);
-// void    *monitor(void *p);
+void    *monitor(void *p);
+
 
 #endif

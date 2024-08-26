@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   message.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:18 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/23 18:04:57 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/24 16:20:53 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void    write_message(t_philo *philo, t_status stat)
     long    time;
     
     pthread_mutex_lock(&philo->data->message);
-    turn_and_check(philo, time_out(philo));
     time = time_now() - philo->data->start_time;
     if(stat == FORK)
         printf("%ld %d has taken a fork\n", time, philo->id);

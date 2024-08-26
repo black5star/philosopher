@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:07 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/23 17:32:13 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/24 16:36:22 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void ft_init(t_main *data)
     pthread_mutex_init(&data->message, NULL);
     pthread_mutex_init(&data->mutex, NULL);
     data->death_flag = 0;
+    data->full = 0;
     i = -1;
     while(++i < data->philo_nb)
     {

@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:58 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/23 17:43:04 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:22:58 by blackstar        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void set_value(pthread_mutex_t *mutex, int *var, int val)
-{
-    pthread_mutex_lock(mutex);
-    *var = val;
-    pthread_mutex_unlock(mutex);
-}
 
 void incrementer(pthread_mutex_t *mutex, int *var)
 {
