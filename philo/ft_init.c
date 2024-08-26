@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:07 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/24 16:36:22 by blackstar        ###   ########.fr       */
+/*   Updated: 2024/08/26 12:18:41 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ void ft_init(t_main *data)
 
     data->philo = malloc(sizeof(t_philo) * data->philo_nb);
     data->forks = malloc(sizeof(t_forks) * data->philo_nb);
+    if (!data->forks || !data->philo)
+        ft_free(data, 1);
     pthread_mutex_init(&data->message, NULL);
+    pthread_mutex_init(&data->monitor_mtx, NULL);
+    pthread_mutex_init(&data->monitor_time, NULL);
     pthread_mutex_init(&data->mutex, NULL);
     data->death_flag = 0;
     data->full = 0;

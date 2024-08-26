@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:46 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/24 18:16:01 by blackstar        ###   ########.fr       */
+/*   Updated: 2024/08/26 12:04:23 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ struct s_forks
     int fork_id;
 };
 
+
 struct s_main
 {
     int philo_nb;
@@ -64,30 +65,38 @@ struct s_main
     t_philo *philo;
     t_forks *forks;
     pthread_t observer;
+    pthread_mutex_t monitor_mtx;
+    pthread_mutex_t monitor_time;
     pthread_mutex_t mutex;
     pthread_mutex_t message;
 };
 
+// in parsing.c file
 void    check_args(int ac, char **av, t_main *data);
 void    invalid_input(int ac, char **av);
 int     ft_atoi(const char	*str);
 
+// in ft_init.c file
 void    ft_init(t_main *data);
 void    init_philos(t_main *data);
 void    init_forks(t_forks *fork, t_philo *philo, int i);
 
+// in feeding.c file
+void    write_message(t_philo *philo, t_status stat);
+void    eating(t_philo *philo);
 void    start_feeding(t_main *data);
 void    *get_dinner(void *p);
-void    eating(t_philo *philo);
 
-long    time_now();
-void    ft_usleep(long u_time, t_philo *philo);
-void    write_message(t_philo *philo, t_status stat);
-int     get_value(pthread_mutex_t *mutex, int *var);
+// in utils.c file
 void    incrementer(pthread_mutex_t *mutex, int *var);
-void    ft_exit(char *s);
-void    turn_and_check(t_philo *philo, int time);
+int     get_value(pthread_mutex_t *mutex, int *var);
+void    ft_usleep(long u_time);
+long    time_now();
 int     time_out(t_philo *philo);
+
+void    ft_exit(char *s);
+void    ft_free(t_main *data, int flag);
+void    turn_and_check(t_philo *philo, int time);
 void    *monitor(void *p);
 
 

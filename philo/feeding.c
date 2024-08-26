@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   feeding.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blackstar <blackstar@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:02:52 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/24 18:31:44 by blackstar        ###   ########.fr       */
+/*   Updated: 2024/08/26 12:24:54 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void    write_message(t_philo *philo, t_status stat)
+{
+    long    time;
+    
+    pthread_mutex_lock(&philo->data->message);
+    time = time_now() - philo->data->start_time;
+    if(stat == FORK)
+        printf("%ld %d has taken a fork\n", time, philo->id);
+    else if(stat == EATING)
+    {
+        philo->last_meal_time = time;
+        printf("%ld %d is eating\n", time, philo->id);
+    }
+    else if(stat == SLEEPING)
+        printf("%ld %d is sleeping\n", time, philo->id);
+    else if(stat == THINKING)
+        printf("%ld %d is thinking\n", time, philo->id);
+    else if(stat == DIED)
+        printf("%ld %d died\n", time, philo->id);
+    pthread_mutex_unlock(&philo->data->message);
+}
 
 void    eating(t_philo *philo)
 {
@@ -20,7 +42,7 @@ void    eating(t_philo *philo)
     write_message(philo, FORK);
     incrementer(&philo->p_mutex, &philo->meals_count);
     write_message(philo, EATING);
-    ft_usleep(philo->data->time_eat, philo);
+    ft_usleep(philo->data->time_eat);
     pthread_mutex_unlock(&philo->right_fork->fork);
     pthread_mutex_unlock(&philo->left_fork->fork);
 }
@@ -34,14 +56,10 @@ void    *get_dinner(void *p)
     while(!get_value(&philo->data->mutex, &philo->data->death_flag))
     {
         if(philo->meals_count == philo->data->max_meals)
-        {
             incrementer(&philo->p_mutex, &philo->data->full);
-            printf("***philo %d is full and the value is %d********\n", philo->id, philo->data->full);
-            break ;
-        }
         eating(philo);
         write_message(philo, SLEEPING);
-        ft_usleep(philo->data->time_slp, philo);
+        ft_usleep(philo->data->time_slp);
         write_message(philo, THINKING);
     }
     return (NULL);
