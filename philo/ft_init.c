@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:07 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/27 16:49:41 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/28 11:17:36 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	init_philos(t_main *data)
 		philo->id = i + 1;
 		philo->data = data;
 		philo->meals_count = 0;
-		pthread_mutex_init(&data->philo->p_mutex, NULL);
 		init_forks(data->forks, philo, i);
 	}
 }
@@ -54,7 +53,6 @@ void	ft_init(t_main *data)
 	data->philo = malloc(sizeof(t_philo) * data->philo_nb);
 	data->forks = malloc(sizeof(t_forks) * data->philo_nb);
 	pthread_mutex_init(&data->monitor_time, NULL);
-	pthread_mutex_init(&data->message, NULL);
 	pthread_mutex_init(&data->monitor_mtx, NULL);
 	pthread_mutex_init(&data->mutex, NULL);
 	data->death_flag = 0;

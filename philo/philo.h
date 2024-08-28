@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:46 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/27 17:27:53 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/28 11:17:46 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_forks	t_forks;
 
 typedef struct s_philo
 {
-	pthread_mutex_t		p_mutex;
 	pthread_t			thread;
 	t_forks				*left_fork;
 	t_forks				*right_fork;
@@ -54,7 +53,6 @@ struct s_forks
 
 struct s_main
 {
-	pthread_mutex_t		message;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		monitor_mtx;
 	pthread_mutex_t		monitor_time;
