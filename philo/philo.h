@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:46 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/28 11:17:46 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/29 11:25:33 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/time.h>
 # include <limits.h>
 # include <string.h>
+
+# define THREADS_LIMIT 62250
 
 typedef enum s_status
 {
@@ -84,7 +86,6 @@ void	init_forks(t_forks *fork, t_philo *philo, int i);
 // in feeding.c file
 void	write_message(t_philo *philo, t_status stat);
 void	eating(t_philo *philo);
-void	*get_dinner(void *p);
 void	start_feeding(t_main *data);
 
 // in utils.c file

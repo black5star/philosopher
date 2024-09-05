@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:02:52 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/27 16:38:12 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:31:14 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	write_message(t_philo *philo, t_status stat)
 
 void	eating(t_philo *philo)
 {
+	if (philo->data->philo_nb == 3 && (philo->id % 2))
+		ft_usleep(50);
 	pthread_mutex_lock(&philo->right_fork->fork);
 	write_message(philo, FORK);
 	pthread_mutex_lock(&philo->left_fork->fork);
@@ -48,6 +50,13 @@ void	eating(t_philo *philo)
 	ft_usleep(philo->data->time_eat);
 	pthread_mutex_unlock(&philo->right_fork->fork);
 	pthread_mutex_unlock(&philo->left_fork->fork);
+}
+
+void	for_one(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->right_fork->fork);
+	write_message(philo, FORK);
+	ft_usleep(philo->data->time_eat);
 }
 
 void	*get_dinner(void *p)
@@ -59,15 +68,21 @@ void	*get_dinner(void *p)
 	while (!get_value(&philo->data->mutex, &philo->data->death_flag)
 		&& !get_value(&philo->data->monitor_mtx, &philo->data->all_are_full))
 	{
-		if (philo->data->philo_nb == 3 && (philo->id % 2))
-			ft_usleep(50);
-		eating(philo);
-		philo->meals_count++;
-		if (philo->meals_count == philo->data->max_meals)
-			incrementer(&philo->data->mutex, &philo->data->full);
-		write_message(philo, SLEEPING);
-		ft_usleep(philo->data->time_slp);
-		write_message(philo, THINKING);
+		if (philo->data->philo_nb == 1)
+		{
+			for_one(philo);
+			break ;
+		}
+		else
+		{
+			eating(philo);
+			philo->meals_count++;
+			if (philo->meals_count == philo->data->max_meals)
+				incrementer(&philo->data->mutex, &philo->data->full);
+			write_message(philo, SLEEPING);
+			ft_usleep(philo->data->time_slp);
+			write_message(philo, THINKING);
+		}
 	}
 	return (NULL);
 }

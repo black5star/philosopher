@@ -6,7 +6,7 @@
 /*   By: hboustaj <hboustaj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:03:30 by hboustaj          #+#    #+#             */
-/*   Updated: 2024/08/27 16:48:30 by hboustaj         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:09:36 by hboustaj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,9 @@ void	check_args(int ac, char **av, t_main *data)
 	}
 	else
 		data->max_meals = -1;
+	if ((data->philo_nb <= 0) || !(data->time_die > 0)
+		|| !(data->time_eat > 0) || !(data->time_slp > 0))
+		ft_exit("Pealse enter positive numbers");
+	if (data->philo_nb > THREADS_LIMIT)
+		ft_exit("your device cannot handel such a number of threads");
 }
